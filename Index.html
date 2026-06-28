@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BRND.ME — Ops Command Centre</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;1,600&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #3D4127;
+  --surface:  #636B2F;
+  --card:     #4a5030;
+  --card-h:   #556038;
+  --border:   #4f5834;
+  --border-h: #6b7540;
+  --white:    #D4DE95;
+  --soft:     #BAC095;
+  --muted:    #8a9260;
+  --accent:   #D4DE95;
+  --text:     #D4DE95;
+
+  --ishin:    #8B1A2B;
+  --bh:       #2a5c3f;
+  --mp:       #5c3d8a;
+  --villain:  #C0392B;
+  --mf:       #E8732A;
+  --master:   #2a5c6e;
+  --dispatch: #2E7D5E;
+  --finance:  #BAC095;
+  --drive:    #3a6080;
+  --hub:      #D4DE95;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── TOP BAR ── */
+.topbar {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px; height: 56px;
+  background: rgba(61,65,39,0.97);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+}
+.topbar-logo {
+  font-family: 'Fraunces', serif;
+  font-size: 17px; font-weight: 700;
+  letter-spacing: 0.2px; color: var(--accent);
+}
+.topbar-logo span { font-style: italic; opacity: 0.75; }
+.topbar-tag {
+  font-size: 10px; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--muted);
+  font-weight: 500;
+}
+.topbar-time {
+  font-size: 11px; color: var(--muted);
+  font-variant-numeric: tabular-nums; font-weight: 300;
+}
+
+/* ── HERO ── */
+.hero {
+  padding: 52px 40px 36px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: flex-end;
+  justify-content: space-between; gap: 24px; flex-wrap: wrap;
+}
+.hero-left h1 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(30px, 4vw, 46px);
+  font-weight: 700; letter-spacing: -0.3px;
+  color: var(--accent); line-height: 1.1; margin-bottom: 12px;
+}
+.hero-left h1 em {
+  font-style: italic; color: var(--soft); opacity: 0.85;
+}
+.hero-left p {
+  font-size: 13px; color: var(--muted);
+  font-weight: 300; line-height: 1.65; max-width: 460px;
+}
+.hero-stats { display: flex; gap: 36px; flex-shrink: 0; }
+.stat { text-align: right; }
+.stat-num {
+  font-family: 'Fraunces', serif;
+  font-size: 30px; font-weight: 700;
+  color: var(--accent); letter-spacing: -0.5px; line-height: 1;
+}
+.stat-num span { color: var(--soft); font-style: italic; }
+.stat-label {
+  font-size: 10px; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--muted);
+  margin-top: 5px; font-weight: 500;
+}
+
+/* ── SECTION ── */
+.section {
+  padding: 28px 40px;
+  border-bottom: 1px solid var(--border);
+}
+.section:last-child { border-bottom: none; }
+.section-head {
+  display: flex; align-items: center; gap: 14px; margin-bottom: 18px;
+}
+.section-label {
+  font-size: 9px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--soft);
+  font-weight: 600; white-space: nowrap;
+}
+.section-line {
+  flex: 1; height: 1px;
+  background: linear-gradient(90deg, var(--border), transparent);
+}
+
+/* ── GRIDS ── */
+.grid { display: grid; gap: 2px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-6 { grid-template-columns: repeat(6, 1fr); }
+
+/* ── TILE ── */
+.tile {
+  display: block; text-decoration: none;
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 20px 22px 18px;
+  position: relative; overflow: hidden;
+  transition: background 0.18s, border-color 0.18s, transform 0.18s;
+  cursor: pointer;
+}
+.tile:hover {
+  background: var(--card-h);
+  border-color: var(--border-h);
+  transform: translateY(-2px);
+}
+.tile::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--t-accent, var(--accent));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.22s;
+}
+.tile:hover::before { transform: scaleX(1); }
+
+.tile-tag {
+  font-size: 9px; letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--t-accent, var(--soft));
+  font-weight: 600; margin-bottom: 9px;
+  display: flex; align-items: center; gap: 6px;
+}
+.tile-tag::before {
+  content: ''; width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--t-accent, var(--soft));
+  flex-shrink: 0;
+}
+.tile-name {
+  font-family: 'Fraunces', serif;
+  font-size: 16px; font-weight: 700;
+  color: var(--accent); line-height: 1.2;
+  margin-bottom: 7px; letter-spacing: -0.1px;
+}
+.tile-desc {
+  font-size: 11px; color: var(--muted);
+  line-height: 1.55; font-weight: 300;
+}
+.tile-arrow {
+  position: absolute; bottom: 16px; right: 18px;
+  font-size: 13px; color: var(--muted);
+  transition: color 0.18s, transform 0.18s;
+}
+.tile:hover .tile-arrow {
+  color: var(--t-accent, var(--accent));
+  transform: translate(2px, -2px);
+}
+
+/* Wide tile */
+.tile-wide {
+  display: flex; align-items: center;
+  justify-content: space-between; gap: 16px;
+}
+.tile-wide .tile-arrow { position: static; font-size: 16px; }
+
+/* ── FOOTER ── */
+.footer {
+  padding: 20px 40px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-top: 1px solid var(--border);
+  background: rgba(61,65,39,0.6);
+}
+.footer-copy { font-size: 11px; color: var(--muted); letter-spacing: 0.3px; }
+.footer-logo {
+  font-family: 'Fraunces', serif;
+  font-size: 14px; font-weight: 700; color: var(--accent);
+}
+.footer-logo span { font-style: italic; opacity: 0.7; }
+
+/* ── RESPONSIVE ── */
+@media(max-width:1100px){ .grid-6{ grid-template-columns: repeat(3,1fr); } }
+@media(max-width:900px){
+  .topbar{ padding:0 24px; }
+  .hero{ padding:36px 24px 28px; }
+  .section{ padding:24px; }
+  .grid-4{ grid-template-columns: repeat(2,1fr); }
+  .grid-3{ grid-template-columns: repeat(2,1fr); }
+  .footer{ padding:16px 24px; }
+}
+@media(max-width:600px){
+  .grid-6,.grid-4,.grid-3,.grid-2{ grid-template-columns:1fr; }
+  .hero-stats{ display:none; }
+  .topbar-tag{ display:none; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-logo">BRND<span>·</span>ME</div>
+  <div class="topbar-tag">Ops Command Centre</div>
+  <div class="topbar-time" id="clock">—</div>
+</div>
+
+<div class="hero">
+  <div class="hero-left">
+    <h1>Influencer Ops<br><em>Command Centre</em></h1>
+    <p>All portals, sheets, trackers, repositories and dashboards for the BRND.ME Middle East influencer gifting program — one place, one click.</p>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">5<span>+</span></div>
+      <div class="stat-label">Live Brands</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Trackers</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">∞</div>
+      <div class="stat-label">Scale</div>
+    </div>
+  </div>
+</div>
+
+<!-- BRAND PORTALS -->
+<div class="section">
+  <div class="section-head">
+    <div class="section-label">Influencer Portals — Live</div>
+    <div class="section-line"></div>
+  </div>
+  <div class="grid grid-6">
+
+    <a href="https://brndme-hub.vercel.app/" target="_blank" class="tile" style="--t-accent:#D4DE95;">
+      <div class="tile-tag">Hub</div>
+      <div class="tile-name">BRND·ME Hub</div>
+      <div class="tile-desc">Central portal — all 5 brands</div>
+      <div class="tile-arrow">↗</div>
+    </a>
+
+    <a href="https://influencer-portal-liart.vercel.app/" target="_blank" class="tile" style="--t-accent:#c4758a;">
+      <div class="tile-tag">Women's Fashion</div>
+      <div class="tile-name">Ishin</div>
+      <div class="tile-desc">Ethnic wear gifting portal</div>
+      <div class="tile-arrow">↗</div>
+    </a>
+
+    <a href="https://botanic-hearth-influencer-managemen.vercel.app/" target="_blank" class="tile" style="--t-accent:#7ABD8E;">
+      <div class="tile-tag">Personal Care</div>
+      <div class="tile-name">Botanic Hearth</div>
+      <div class="tile-desc">Hair, skin & body care</div>
+      <div class="tile-arrow">↗</div>
+    </a>
+
+    <a href="https://majestic-pure-influencer-management.vercel.app/" target="_blank" class="tile" style="--t-accent:#9B7FBD;">
+      <div class="tile-tag">Wellness</div>
+      <div class="tile-name">Majestic Pure</div>
+      <div class="tile-desc">Aromatherapy & wellness</div>
+      <div class="tile-arrow">↗</div>
+    </a>
+
+    <a href="https://villain-influencer-management.vercel.app/" target="_blank" class="tile" style="--t-accent:#E87070;">
+      <div class="tile-tag">Fragrance</div>
+      <div class="tile-name">Villain</div>
+      <div class="tile-desc">Premium fragrance</div>
+      <div class="tile-arrow">↗</div>
+    </a>
+
+    <a href="https://my-fitness-influencer-management.vercel.app/" target="_blank" class="tile" style="--t-accent:#E8972A;">
+      <div class="tile-tag">Fitness & Lifestyle</div>
+      <div class="tile-name">MyFitness</div>
+      <div class="tile-desc">Nutrition & wellness</div>
+      <div class="tile-arrow">↗</div>
+    </a>
+
+  </div>
+</div>
+
+<!-- BRAND DATA SHEETS -->
+<div class="section">
+  <div class="section-head">
+    <div class="section-label">Brand Order & Catalog Sheets</div>
+    <div class="section-line"></div>
+  </div>
+  <div class="grid grid-4">
+
+    <a href="https://docs.google.com/spreadsheets/d/1I5h28_DuDituBAQbdHX_rz4RFNPzA8pflzYrmrOTLnE/edit" target="_blank" class="tile" style="--t-accent:#c4758a;">
+      <div class="tile-tag">Ishin</div>
+      <div class="tile-name">Order Record & Catalog</div>
+      <div class="tile-desc">Orders · catalog master · dispatch sync · Apps Script</div>
+      <div class="tile-arrow">↗</div>
+    </a>
+
+    <a href="https://docs.google.com/spreadsheets/d/1znEEtFTV8SvokWkmJ9GQOswxunpwIFiiU9lkXgUsisM/edit" target="_blank" class="tile" style="--t-accent:#7ABD8E;">
+      <div class="tile-tag">Botanic Hearth</div>
+      <div class="tile-name">Order Record & Catalog</div>
+      <div class="tile-desc">Orders · product master · catalog master</div>
+      <div class="tile-arrow">↗</div>
+    </a>
+
+    <a href="https://docs.google.com/spreadsheets/d/1DKyiYXu4FgUKQrbBcb28zBfzAjgZgMGHfksWgyTn67I/edit" target="_blank" class="tile" style="--t-accent:#9B7FBD;">
+      <div class="tile-tag">Majestic Pure</div>
+      <div class="tile-name">Order Record & Catalog</div>
+      <div class="tile-desc">Orders · product master · catalog master</div>
+      <div class="tile-arrow">↗</div>
+    </a>
+
+    <a href="https://docs.google.com/spreadsheets/d/1lhewpuKNXW-i1jMi2r-l_noW87DFw9EDq-ifd_dPxdU/edit" target="_blank" class="tile" style="--t-accent:#E87070;">
+      <div class="tile-tag">Villain</div>
+      <div class="tile-name">Order Record & Catalog</div>
+      <div class="tile-desc">Orders · product master · catalog master</div>
+      <div class="tile-arrow">↗</div>
+    </a>
+
+    <a href="https://docs.google.com/spreadsheets/d/1OIrmgumHnObBGlNWd5KMJjpH8x4LFoxdYTT6ZppwleQ/edit" target="_blank" class="tile" style="--t-accent:#E8972A;">
+      <div class="tile-tag">MyFitness</div>
+      <div class="tile-name">Order Record & Catalog</div>
+      <div class="tile-desc">Orders · product master · catalog master</div>
+      <div class="tile-arrow">↗</div>
+    </a>
+
+  </div>
+</div>
+
+<!-- MASTER & TRACKERS -->
+<div class="section">
+  <div class="section-head">
+    <div class="section-label">Master Sheet & Trackers</div>
+    <div class="section-line"></div>
+  </div>
+  <div class="grid grid-3">
+
+    <a href="https://docs.google.com/spreadsheets/d/16ncSViKsyUA4_jbiYkBXU0I_W3tDAwDjLg9esvRP0Qc/edit" target="_blank" class="tile" style="--t-accent:#7EC8D8;">
+      <div class="tile-tag">Consolidation</div>
+      <div class="tile-name">Master Order Sheet</div>
+      <div class="tile-desc">Cross-brand orders — lot assignment · CSV generation · FSL dispatch email · BH · MP · Villain · MF</div>
+      <div class="tile-arrow">↗</div>
+    </a>
+
+    <a href="https://docs.google.com/spreadsheets/d/1-mhX3OPkZiCAseIYs2wP9DsrfedyiDtRv2-JbK4mwO0/edit" target="_blank" class="tile" style="--t-accent:#7ABD8E;">
+      <div class="tile-tag">Logistics</div>
+      <div class="tile-name">Dispatch & Delivery Tracker</div>
+      <div class="tile-desc">Packing status · AWB numbers · dispatch & delivery status · EMX tracking links</div>
+      <div class="tile-arrow">↗</div>
+    </a>
+
+    <a href="https://docs.google.com/spreadsheets/d/12NeJf0iAAP--DAscZH_RJtRb-ULBmPU0e7vUiYXLsr8/edit" target="_blank" class="tile" style="--t-accent:#D4DE95;">
+      <div class="tile-tag">Finance</div>
+      <div class="tile-name">Shipment Cost Tracker</div>
+      <div class="tile-desc">Per-shipment landed COGS + logistics · monthly cost report to finance team</div>
+      <div class="tile-arrow">↗</div>
+    </a>
+
+  </div>
+</div>
+
+<!-- SUMMARY DASHBOARD -->
+<div class="section">
+  <div class="section-head">
+    <div class="section-label">Summary Dashboard</div>
+    <div class="section-line"></div>
+  </div>
+  <div class="grid grid-2">
+
+    <a href="https://docs.google.com/spreadsheets/d/1oMmzG7Z9FOYWwxELiXumortYBHIqozgO/edit?gid=686453389" target="_blank" class="tile tile-wide" style="--t-accent:#D4DE95;">
+      <div>
+        <div class="tile-tag">Analytics</div>
+        <div class="tile-name">Ops Summary Dashboard</div>
+        <div class="tile-desc">Pipeline overview · brand-wise breakdown · dispatch & delivery status · finance summary · month-wise cost trend</div>
+      </div>
+      <div class="tile-arrow" style="position:static;font-size:18px;">↗</div>
+    </a>
+
+    <a href="https://drive.google.com/drive/folders/1TN4WV32t-tzCOcMvyFqX4Oti3LMo5-Al" target="_blank" class="tile tile-wide" style="--t-accent:#BAC095;">
+      <div>
+        <div class="tile-tag">Reports & Presentations</div>
+        <div class="tile-name">Reports & Presentation Folder</div>
+        <div class="tile-desc">Influencer management · sample dispatch reports · presentations and decks</div>
+      </div>
+      <div class="tile-arrow" style="position:static;font-size:18px;">↗</div>
+    </a>
+
+  </div>
+</div>
+
+<!-- DEV & REPOSITORIES -->
+<div class="section">
+  <div class="section-head">
+    <div class="section-label">Dev, Code & Storage</div>
+    <div class="section-line"></div>
+  </div>
+  <div class="grid grid-2">
+
+    <a href="https://github.com/anupamchakravourty-Mensa" target="_blank" class="tile tile-wide" style="--t-accent:#BAC095;">
+      <div>
+        <div class="tile-tag">GitHub</div>
+        <div class="tile-name">Code Repositories</div>
+        <div class="tile-desc">All 5 brand portal source code + hub — Vercel deployment pipeline</div>
+      </div>
+      <div class="tile-arrow" style="position:static;font-size:16px;">↗</div>
+    </a>
+
+    <a href="https://vercel.com/anupam-chakravourty-s-projects" target="_blank" class="tile tile-wide" style="--t-accent:#BAC095;">
+      <div>
+        <div class="tile-tag">Vercel</div>
+        <div class="tile-name">Deployment Dashboard</div>
+        <div class="tile-desc">Live deployments for all portals — build logs and domain management</div>
+      </div>
+      <div class="tile-arrow" style="position:static;font-size:16px;">↗</div>
+    </a>
+
+    <a href="https://drive.google.com/drive/folders/1dF7yhwPsm4luV01IaSG_P6F_HHZIAC5A" target="_blank" class="tile tile-wide" style="--t-accent:#7EC8D8;">
+      <div>
+        <div class="tile-tag">Google Drive</div>
+        <div class="tile-name">Task Tracker Repository</div>
+        <div class="tile-desc">Influencer management & sample dispatch task files</div>
+      </div>
+      <div class="tile-arrow" style="position:static;font-size:16px;">↗</div>
+    </a>
+
+    <a href="https://drive.google.com/drive/folders/1oFL4GI4QJYNjVnrQ04PqPMoboooie2k9" target="_blank" class="tile tile-wide" style="--t-accent:#7EC8D8;">
+      <div>
+        <div class="tile-tag">Google Drive</div>
+        <div class="tile-name">Dispatch Task Repository</div>
+        <div class="tile-desc">Influencer sample dispatch lot CSVs and shipping documents</div>
+      </div>
+      <div class="tile-arrow" style="position:static;font-size:16px;">↗</div>
+    </a>
+
+  </div>
+</div>
+
+<div class="footer">
+  <div class="footer-copy">BRND.ME Middle East · Influencer Ops · Internal Use Only</div>
+  <div class="footer-logo">BRND<span>·</span>ME</div>
+</div>
+
+<script>
+function updateClock() {
+  const now = new Date();
+  const time = now.toLocaleTimeString('en-GB', {
+    hour: '2-digit', minute: '2-digit', second: '2-digit',
+    timeZone: 'Asia/Dubai'
+  });
+  const date = now.toLocaleDateString('en-GB', {
+    day: '2-digit', month: 'short', year: 'numeric',
+    timeZone: 'Asia/Dubai'
+  });
+  document.getElementById('clock').textContent = date + '  ·  ' + time + ' GST';
+}
+updateClock();
+setInterval(updateClock, 1000);
+</script>
+</body>
+</html>
