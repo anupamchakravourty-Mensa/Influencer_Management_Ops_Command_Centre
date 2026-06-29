@@ -7,28 +7,40 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;1,600&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:       #0B0C10;
-  --surface:  #1F2833;
-  --card:     #C5C6C7;
-  --card-h:   #66F6F1;
-  --border:   #4FA29E;
-  --border-h: #6b7540;
-  --white:    #D4DE95;
-  --soft:     #BAC095;
-  --muted:    #8a9260;
-  --accent:   #D4DE95;
-  --text:     #D4DE95;
+  /* ── BASE (Image 2 + Image 3 blended) ─────────────────
+     Deep blue-black from Img2, warmed with Img3 teal-navy */
+  --bg:       #111D27;   /* between 212A31 + 244855 — rich dark navy */
+  --surface:  #1A2D3A;   /* 244855 lightened — deep teal-navy surface */
+  --card:     #1E3040;   /* card bg — blue-slate */
+  --card-h:   #244855;   /* Img3 244855 — hover state */
+  --border:   #1F3545;   /* subtle border */
+  --border-h: #90AEAD;   /* Img3 muted teal-grey for hover borders */
 
-  --ishin:    #8B1A2B;
-  --bh:       #2a5c3f;
-  --mp:       #5c3d8a;
-  --villain:  #C0392B;
-  --mf:       #E8732A;
-  --master:   #2a5c6e;
-  --dispatch: #2E7D5E;
-  --finance:  #BAC095;
-  --drive:    #3a6080;
-  --hub:      #D4DE95;
+  /* ── ACCENT (Image 1 teal + Image 3 coral balance) ────
+     Primary accent: teal-cyan from Img1
+     Secondary/warm accent: coral-red from Img3          */
+  --accent:   #66FCF1;   /* Img1 electric teal — primary accent */
+  --coral:    #E64833;   /* Img3 warm coral-red — secondary accent */
+  --cream:    #FBE9D0;   /* Img3 warm cream — warm highlight */
+  --steel:    #90AEAD;   /* Img3 muted teal-grey — mid tone */
+
+  /* ── TEXT ──────────────────────────────────────────── */
+  --white:    #E8EFF2;   /* near-white for headings */
+  --soft:     #D3D9D4;   /* Img2 D3D9D4 — body text */
+  --muted:    #90AEAD;   /* Img3 steel — muted labels */
+  --text:     #D3D9D4;
+
+  /* ── BRAND TILE ACCENTS ────────────────────────────── */
+  --ishin:    #c4758a;
+  --bh:       #4AAD7A;
+  --mp:       #9B7FBD;
+  --villain:  #E64833;   /* Img3 coral — suits Villain perfectly */
+  --mf:       #E8972A;
+  --master:   #66FCF1;
+  --dispatch: #4AAD7A;
+  --finance:  #90AEAD;
+  --drive:    #90AEAD;
+  --hub:      #66FCF1;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -36,7 +48,7 @@ html { scroll-behavior: smooth; }
 body {
   font-family: 'DM Sans', sans-serif;
   background: var(--bg);
-  color: var(--text);
+  color: var(--soft);
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
 }
@@ -46,7 +58,7 @@ body {
   position: sticky; top: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 40px; height: 56px;
-  background: rgba(61,65,39,0.97);
+  background: rgba(17,29,39,0.97);
   border-bottom: 1px solid var(--border);
   backdrop-filter: blur(10px);
 }
@@ -111,12 +123,12 @@ body {
 }
 .section-label {
   font-size: 9px; letter-spacing: 3px;
-  text-transform: uppercase; color: var(--soft);
+  text-transform: uppercase; color: var(--steel);
   font-weight: 600; white-space: nowrap;
 }
 .section-line {
   flex: 1; height: 1px;
-  background: linear-gradient(90deg, var(--border), transparent);
+  background: linear-gradient(90deg, #244855, transparent);
 }
 
 /* ── GRIDS ── */
@@ -153,7 +165,7 @@ body {
 .tile-tag {
   font-size: 9px; letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--t-accent, var(--soft));
+  color: var(--t-accent, var(--accent));
   font-weight: 600; margin-bottom: 9px;
   display: flex; align-items: center; gap: 6px;
 }
@@ -166,7 +178,7 @@ body {
 .tile-name {
   font-family: 'Fraunces', serif;
   font-size: 16px; font-weight: 700;
-  color: var(--accent); line-height: 1.2;
+  color: var(--soft); line-height: 1.2;
   margin-bottom: 7px; letter-spacing: -0.1px;
 }
 .tile-desc {
@@ -195,13 +207,14 @@ body {
   padding: 20px 40px;
   display: flex; align-items: center; justify-content: space-between;
   border-top: 1px solid var(--border);
-  background: rgba(61,65,39,0.6);
+  background: rgba(17,29,39,0.8);
 }
 .footer-copy { font-size: 11px; color: var(--muted); letter-spacing: 0.3px; }
 .footer-logo {
   font-family: 'Fraunces', serif;
   font-size: 14px; font-weight: 700; color: var(--accent);
 }
+
 .footer-logo span { font-style: italic; opacity: 0.7; }
 
 /* ── RESPONSIVE ── */
@@ -286,7 +299,7 @@ body {
       <div class="tile-arrow">↗</div>
     </a>
 
-    <a href="https://villain-influencer-management.vercel.app/" target="_blank" class="tile" style="--t-accent:#E87070;">
+    <a href="https://villain-influencer-management.vercel.app/" target="_blank" class="tile" style="--t-accent:#E64833;">
       <div class="tile-tag">Fragrance</div>
       <div class="tile-name">Villain</div>
       <div class="tile-desc">Premium fragrance</div>
@@ -332,7 +345,7 @@ body {
       <div class="tile-arrow">↗</div>
     </a>
 
-    <a href="https://docs.google.com/spreadsheets/d/1lhewpuKNXW-i1jMi2r-l_noW87DFw9EDq-ifd_dPxdU/edit" target="_blank" class="tile" style="--t-accent:#E87070;">
+    <a href="https://docs.google.com/spreadsheets/d/1lhewpuKNXW-i1jMi2r-l_noW87DFw9EDq-ifd_dPxdU/edit" target="_blank" class="tile" style="--t-accent:#E64833;">
       <div class="tile-tag">Villain</div>
       <div class="tile-name">Order Record & Catalog</div>
       <div class="tile-desc">Orders · product master · catalog master</div>
@@ -387,9 +400,9 @@ body {
     <div class="section-label">Summary Dashboard</div>
     <div class="section-line"></div>
   </div>
-  <div class="grid grid-2">
+  <div class="grid grid-3">
 
-    <a href="https://docs.google.com/spreadsheets/d/1oMmzG7Z9FOYWwxELiXumortYBHIqozgO/edit?gid=686453389" target="_blank" class="tile tile-wide" style="--t-accent:#D4DE95;">
+    <a href="https://docs.google.com/spreadsheets/d/1oMmzG7Z9FOYWwxELiXumortYBHIqozgO/edit?gid=686453389" target="_blank" class="tile tile-wide" style="--t-accent:#66FCF1;">
       <div>
         <div class="tile-tag">Analytics</div>
         <div class="tile-name">Ops Summary Dashboard</div>
@@ -398,7 +411,16 @@ body {
       <div class="tile-arrow" style="position:static;font-size:18px;">↗</div>
     </a>
 
-    <a href="https://drive.google.com/drive/folders/1TN4WV32t-tzCOcMvyFqX4Oti3LMo5-Al" target="_blank" class="tile tile-wide" style="--t-accent:#BAC095;">
+    <a href="https://docs.google.com/spreadsheets/d/1Npzw_KXvyYL4LkKtfHYF62dDpHJ0f01oojmRdkSXwVM/edit?gid=593452235" target="_blank" class="tile tile-wide" style="--t-accent:#90AEAD;">
+      <div>
+        <div class="tile-tag">Influencer Data</div>
+        <div class="tile-name">Influencer Master Repository</div>
+        <div class="tile-desc">Consolidated influencer contacts · details · channel data · updated by team</div>
+      </div>
+      <div class="tile-arrow" style="position:static;font-size:18px;">↗</div>
+    </a>
+
+    <a href="https://drive.google.com/drive/folders/1TN4WV32t-tzCOcMvyFqX4Oti3LMo5-Al" target="_blank" class="tile tile-wide" style="--t-accent:#FBE9D0;">
       <div>
         <div class="tile-tag">Reports & Presentations</div>
         <div class="tile-name">Reports & Presentation Folder</div>
