@@ -4,36 +4,34 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BRND.ME — Ops Command Centre</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:      #F2EFE9;   /* warm off-white — reference body bg */
-  --surface: #E8E4DC;   /* slightly darker off-white for sections */
-  --card:    #ECEAE4;   /* card bg */
-  --card-h:  #E3DFD7;   /* card hover */
-  --ink:     #111111;   /* near-black — primary text */
-  --muted:   #777770;   /* warm grey muted */
-  --border:  #D4D0C8;   /* subtle warm border */
-  --red:     #E64833;   /* coral-red — reference primary accent block */
-  --teal:    #244855;   /* deep teal — secondary accent */
-  --cream:   #FBE9D0;   /* warm cream highlight */
-
-  /* tile accents */
-  --ishin:    #8B1A2B;
-  --bh:       #1A4D30;
-  --mp:       #4A2D7A;
-  --villain:  #E64833;
-  --mf:       #C05A00;
-  --master:   #244855;
-  --dispatch: #1A4D30;
-  --finance:  #4A4A3A;
-  --drive:    #244855;
+  --bg:      #0E1117;
+  --surface: #141920;
+  --card:    #171D26;
+  --card-h:  #1E2733;
+  --ink:     #E8EDF2;
+  --muted:   #6B7A8D;
+  --border:  #222C38;
+  --red:     #E64833;
+  --teal:    #244855;
+  --cream:   #FBE9D0;
+  --ishin:   #c4758a;
+  --bh:      #4AAD7A;
+  --mp:      #9B7FBD;
+  --villain: #E64833;
+  --mf:      #E8972A;
+  --master:  #66C8D4;
+  --dispatch:#4AAD7A;
+  --finance: #90AEAD;
+  --drive:   #66C8D4;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Syne', sans-serif;
   background: var(--bg);
   color: var(--ink);
   min-height: 100vh;
@@ -45,24 +43,24 @@ body {
   position: sticky; top: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 40px; height: 52px;
-  background: var(--ink);
+  background: #080C11;
   border-bottom: 3px solid var(--red);
 }
 .topbar-logo {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Syne', sans-serif;
   font-size: 15px; font-weight: 700;
-  letter-spacing: 1px; color: var(--bg);
+  letter-spacing: 1px; color: var(--ink);
   text-transform: uppercase;
 }
 .topbar-logo span { color: var(--red); }
 .topbar-tag {
   font-size: 10px; letter-spacing: 3px;
-  text-transform: uppercase; color: #666;
+  text-transform: uppercase; color: var(--muted);
   font-weight: 400;
 }
 .topbar-time {
-  font-family: 'Space Mono', monospace;
-  font-size: 11px; color: #888;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px; color: var(--muted);
   font-variant-numeric: tabular-nums;
 }
 
@@ -73,9 +71,9 @@ body {
   display: flex; align-items: flex-end;
   justify-content: space-between; gap: 32px; flex-wrap: wrap;
   background: var(--bg);
-}
+}  
 .hero-left h1 {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Syne', sans-serif;
   font-size: clamp(36px, 5vw, 64px);
   font-weight: 700;
   letter-spacing: -1.5px;
@@ -97,11 +95,11 @@ body {
 .stat {
   text-align: center;
   padding: 20px 32px;
-  border-left: 1px solid var(--border);
+  border-left: 1px solid #222;
 }
 .stat:first-child { border-left: none; }
 .stat-num {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Syne', sans-serif;
   font-size: 40px; font-weight: 700;
   color: var(--ink); letter-spacing: -2px; line-height: 1;
 }
@@ -126,15 +124,15 @@ body {
 }
 .section-label {
   font-size: 9px; letter-spacing: 3px;
-  text-transform: uppercase; color: var(--bg);
+  text-transform: uppercase; color: #ffffff;
   font-weight: 600; white-space: nowrap;
-  background: var(--ink);
+  background: var(--red);
   padding: 10px 20px;
   display: flex; align-items: center;
 }
 .section-count {
   font-size: 9px; letter-spacing: 1px;
-  color: var(--muted); padding: 10px 16px;
+  color: #444; padding: 10px 16px;
   display: flex; align-items: center;
 }
 
@@ -186,7 +184,7 @@ body {
   font-weight: 600; margin-bottom: 10px;
 }
 .tile-name {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Syne', sans-serif;
   font-size: 15px; font-weight: 700;
   color: var(--ink); line-height: 1.25;
   margin-bottom: 8px;
@@ -198,7 +196,7 @@ body {
 }
 .tile-arrow {
   position: absolute; bottom: 18px; right: 22px;
-  font-family: 'Space Mono', monospace;
+  font-family: 'Inter', sans-serif;
   font-size: 12px; color: var(--border);
   transition: color 0.15s, transform 0.15s;
 }
@@ -238,13 +236,13 @@ body {
 
 /* Dark accent block */
 .tile-dark {
-  background: var(--ink);
+  background: #1A2535;
 }
-.tile-dark:hover { background: #222; }
-.tile-dark .tile-tag { color: rgba(255,255,255,0.4); }
-.tile-dark .tile-name { color: #fff; }
-.tile-dark .tile-desc { color: rgba(255,255,255,0.45); }
-.tile-dark .tile-arrow { color: rgba(255,255,255,0.2); }
+.tile-dark:hover { background: #1E2D40; }
+.tile-dark .tile-tag { color: rgba(200,220,240,0.5); }
+.tile-dark .tile-name { color: #E8EDF2; }
+.tile-dark .tile-desc { color: rgba(200,215,230,0.55); }
+.tile-dark .tile-arrow { color: rgba(200,215,230,0.25); }
 .tile-dark:hover .tile-arrow { color: var(--red); }
 .tile-dark::after { background: var(--red); }
 
@@ -253,16 +251,16 @@ body {
   padding: 18px 40px;
   display: flex; align-items: center; justify-content: space-between;
   border-top: 1px solid var(--border);
-  background: var(--ink);
+  background: #080C11;
 }
 .footer-copy {
   font-size: 10px; color: #555; letter-spacing: 1px;
   text-transform: uppercase;
 }
 .footer-logo {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Syne', sans-serif;
   font-size: 13px; font-weight: 700;
-  color: var(--bg); letter-spacing: 1px;
+  color: var(--ink); letter-spacing: 1px;
   text-transform: uppercase;
 }
 .footer-logo span { color: var(--red); }
@@ -324,7 +322,7 @@ body {
   </div>
   <div class="grid grid-6">
 
-    <a href="https://brndme-hub.vercel.app/" target="_blank" class="tile tile-dark" style="--t-accent:#E64833;">
+    <a href="https://brndme-hub.vercel.app/" target="_blank" class="tile tile-accent" style="--t-accent:#E64833;">
       <div class="tile-tag">Hub</div>
       <div class="tile-name">BRND·ME Hub</div>
       <div class="tile-desc">Central portal — all 5 brands</div>
@@ -455,7 +453,7 @@ body {
   </div>
   <div class="grid grid-3">
 
-    <a href="https://docs.google.com/spreadsheets/d/1oMmzG7Z9FOYWwxELiXumortYBHIqozgO/edit?gid=686453389" target="_blank" class="tile tile-dark" style="--t-accent:#E64833;">
+    <a href="https://docs.google.com/spreadsheets/d/1oMmzG7Z9FOYWwxELiXumortYBHIqozgO/edit?gid=686453389" target="_blank" class="tile" style="--t-accent:#E64833;">
       <div class="tile-tag">Analytics</div>
       <div class="tile-name">Ops Summary Dashboard</div>
       <div class="tile-desc">Pipeline overview · brand-wise breakdown · dispatch & delivery · finance summary · month-wise trend</div>
