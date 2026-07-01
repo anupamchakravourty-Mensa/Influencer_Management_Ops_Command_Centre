@@ -4,51 +4,38 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BRND.ME — Ops Command Centre</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;1,600&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  /* ── BASE (Image 2 + Image 3 blended) ─────────────────
-     Deep blue-black from Img2, warmed with Img3 teal-navy */
-  --bg:       #111D27;   /* between 212A31 + 244855 — rich dark navy */
-  --surface:  #1A2D3A;   /* 244855 lightened — deep teal-navy surface */
-  --card:     #1E3040;   /* card bg — blue-slate */
-  --card-h:   #244855;   /* Img3 244855 — hover state */
-  --border:   #1F3545;   /* subtle border */
-  --border-h: #90AEAD;   /* Img3 muted teal-grey for hover borders */
+  --bg:      #F2EFE9;   /* warm off-white — reference body bg */
+  --surface: #E8E4DC;   /* slightly darker off-white for sections */
+  --card:    #ECEAE4;   /* card bg */
+  --card-h:  #E3DFD7;   /* card hover */
+  --ink:     #111111;   /* near-black — primary text */
+  --muted:   #777770;   /* warm grey muted */
+  --border:  #D4D0C8;   /* subtle warm border */
+  --red:     #E64833;   /* coral-red — reference primary accent block */
+  --teal:    #244855;   /* deep teal — secondary accent */
+  --cream:   #FBE9D0;   /* warm cream highlight */
 
-  /* ── ACCENT (Image 1 teal + Image 3 coral balance) ────
-     Primary accent: teal-cyan from Img1
-     Secondary/warm accent: coral-red from Img3          */
-  --accent:   #66FCF1;   /* Img1 electric teal — primary accent */
-  --coral:    #E64833;   /* Img3 warm coral-red — secondary accent */
-  --cream:    #FBE9D0;   /* Img3 warm cream — warm highlight */
-  --steel:    #90AEAD;   /* Img3 muted teal-grey — mid tone */
-
-  /* ── TEXT ──────────────────────────────────────────── */
-  --white:    #E8EFF2;   /* near-white for headings */
-  --soft:     #D3D9D4;   /* Img2 D3D9D4 — body text */
-  --muted:    #90AEAD;   /* Img3 steel — muted labels */
-  --text:     #D3D9D4;
-
-  /* ── BRAND TILE ACCENTS ────────────────────────────── */
-  --ishin:    #c4758a;
-  --bh:       #4AAD7A;
-  --mp:       #9B7FBD;
-  --villain:  #E64833;   /* Img3 coral — suits Villain perfectly */
-  --mf:       #E8972A;
-  --master:   #66FCF1;
-  --dispatch: #4AAD7A;
-  --finance:  #90AEAD;
-  --drive:    #90AEAD;
-  --hub:      #66FCF1;
+  /* tile accents */
+  --ishin:    #8B1A2B;
+  --bh:       #1A4D30;
+  --mp:       #4A2D7A;
+  --villain:  #E64833;
+  --mf:       #C05A00;
+  --master:   #244855;
+  --dispatch: #1A4D30;
+  --finance:  #4A4A3A;
+  --drive:    #244855;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   background: var(--bg);
-  color: var(--soft);
+  color: var(--ink);
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
 }
@@ -57,82 +44,102 @@ body {
 .topbar {
   position: sticky; top: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 0 40px; height: 56px;
-  background: rgba(17,29,39,0.97);
-  border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(10px);
+  padding: 0 40px; height: 52px;
+  background: var(--ink);
+  border-bottom: 3px solid var(--red);
 }
 .topbar-logo {
-  font-family: 'Fraunces', serif;
-  font-size: 17px; font-weight: 700;
-  letter-spacing: 0.2px; color: var(--accent);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px; font-weight: 700;
+  letter-spacing: 1px; color: var(--bg);
+  text-transform: uppercase;
 }
-.topbar-logo span { font-style: italic; opacity: 0.75; }
+.topbar-logo span { color: var(--red); }
 .topbar-tag {
-  font-size: 10px; letter-spacing: 2.5px;
-  text-transform: uppercase; color: var(--muted);
-  font-weight: 500;
+  font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase; color: #666;
+  font-weight: 400;
 }
 .topbar-time {
-  font-size: 11px; color: var(--muted);
-  font-variant-numeric: tabular-nums; font-weight: 300;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px; color: #888;
+  font-variant-numeric: tabular-nums;
 }
 
 /* ── HERO ── */
 .hero {
-  padding: 52px 40px 36px;
+  padding: 56px 40px 40px;
   border-bottom: 1px solid var(--border);
   display: flex; align-items: flex-end;
-  justify-content: space-between; gap: 24px; flex-wrap: wrap;
+  justify-content: space-between; gap: 32px; flex-wrap: wrap;
+  background: var(--bg);
 }
 .hero-left h1 {
-  font-family: 'Fraunces', serif;
-  font-size: clamp(30px, 4vw, 46px);
-  font-weight: 700; letter-spacing: -0.3px;
-  color: var(--accent); line-height: 1.1; margin-bottom: 12px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 700;
+  letter-spacing: -1.5px;
+  line-height: 0.95;
+  color: var(--ink);
+  margin-bottom: 20px;
+  text-transform: uppercase;
 }
 .hero-left h1 em {
-  font-style: italic; color: var(--soft); opacity: 0.85;
+  font-style: normal;
+  color: var(--red);
+  display: block;
 }
 .hero-left p {
   font-size: 13px; color: var(--muted);
-  font-weight: 300; line-height: 1.65; max-width: 460px;
+  font-weight: 400; line-height: 1.6; max-width: 440px;
 }
-.hero-stats { display: flex; gap: 36px; flex-shrink: 0; }
-.stat { text-align: right; }
+.hero-stats { display: flex; gap: 0; flex-shrink: 0; }
+.stat {
+  text-align: center;
+  padding: 20px 32px;
+  border-left: 1px solid var(--border);
+}
+.stat:first-child { border-left: none; }
 .stat-num {
-  font-family: 'Fraunces', serif;
-  font-size: 30px; font-weight: 700;
-  color: var(--accent); letter-spacing: -0.5px; line-height: 1;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 40px; font-weight: 700;
+  color: var(--ink); letter-spacing: -2px; line-height: 1;
 }
-.stat-num span { color: var(--soft); font-style: italic; }
+.stat-num em { color: var(--red); font-style: normal; }
 .stat-label {
-  font-size: 10px; letter-spacing: 1.5px;
+  font-size: 9px; letter-spacing: 2.5px;
   text-transform: uppercase; color: var(--muted);
-  margin-top: 5px; font-weight: 500;
+  margin-top: 6px; font-weight: 500;
 }
 
 /* ── SECTION ── */
 .section {
-  padding: 28px 40px;
+  padding: 0 40px 32px;
   border-bottom: 1px solid var(--border);
 }
-.section:last-child { border-bottom: none; }
+.section:last-child { border-bottom: none; padding-bottom: 48px; }
+
 .section-head {
-  display: flex; align-items: center; gap: 14px; margin-bottom: 18px;
+  display: flex; align-items: stretch;
+  gap: 0; margin-bottom: 2px;
+  border-bottom: 1px solid var(--border);
 }
 .section-label {
   font-size: 9px; letter-spacing: 3px;
-  text-transform: uppercase; color: var(--steel);
+  text-transform: uppercase; color: var(--bg);
   font-weight: 600; white-space: nowrap;
+  background: var(--ink);
+  padding: 10px 20px;
+  display: flex; align-items: center;
 }
-.section-line {
-  flex: 1; height: 1px;
-  background: linear-gradient(90deg, #244855, transparent);
+.section-count {
+  font-size: 9px; letter-spacing: 1px;
+  color: var(--muted); padding: 10px 16px;
+  display: flex; align-items: center;
 }
 
 /* ── GRIDS ── */
-.grid { display: grid; gap: 2px; }
+.grid { display: grid; gap: 1px; background: var(--border); }
 .grid-2 { grid-template-columns: repeat(2, 1fr); }
 .grid-3 { grid-template-columns: repeat(3, 1fr); }
 .grid-4 { grid-template-columns: repeat(4, 1fr); }
@@ -142,87 +149,130 @@ body {
 .tile {
   display: block; text-decoration: none;
   background: var(--card);
-  border: 1px solid var(--border);
-  padding: 20px 22px 18px;
+  padding: 22px 24px 44px;
   position: relative; overflow: hidden;
-  transition: background 0.18s, border-color 0.18s, transform 0.18s;
+  transition: background 0.15s;
   cursor: pointer;
 }
-.tile:hover {
-  background: var(--card-h);
-  border-color: var(--border-h);
-  transform: translateY(-2px);
-}
+.tile:hover { background: var(--card-h); }
+
+/* Left colour bar — brand accent */
 .tile::before {
   content: '';
-  position: absolute; top: 0; left: 0; right: 0; height: 2px;
-  background: var(--t-accent, var(--accent));
-  transform: scaleX(0); transform-origin: left;
-  transition: transform 0.22s;
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 3px;
+  background: var(--t-accent, var(--ink));
+  opacity: 0;
+  transition: opacity 0.15s;
 }
-.tile:hover::before { transform: scaleX(1); }
+.tile:hover::before { opacity: 1; }
+
+/* Top accent line on hover */
+.tile::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: var(--t-accent, var(--ink));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.2s cubic-bezier(0.4,0,0.2,1);
+}
+.tile:hover::after { transform: scaleX(1); }
 
 .tile-tag {
-  font-size: 9px; letter-spacing: 2px;
+  font-size: 9px; letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: var(--t-accent, var(--accent));
-  font-weight: 600; margin-bottom: 9px;
-  display: flex; align-items: center; gap: 6px;
-}
-.tile-tag::before {
-  content: ''; width: 5px; height: 5px;
-  border-radius: 50%;
-  background: var(--t-accent, var(--soft));
-  flex-shrink: 0;
+  color: var(--t-accent, var(--muted));
+  font-weight: 600; margin-bottom: 10px;
 }
 .tile-name {
-  font-family: 'Fraunces', serif;
-  font-size: 16px; font-weight: 700;
-  color: var(--soft); line-height: 1.2;
-  margin-bottom: 7px; letter-spacing: -0.1px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px; font-weight: 700;
+  color: var(--ink); line-height: 1.25;
+  margin-bottom: 8px;
+  letter-spacing: -0.3px;
 }
 .tile-desc {
   font-size: 11px; color: var(--muted);
-  line-height: 1.55; font-weight: 300;
+  line-height: 1.6; font-weight: 400;
 }
 .tile-arrow {
-  position: absolute; bottom: 16px; right: 18px;
-  font-size: 13px; color: var(--muted);
-  transition: color 0.18s, transform 0.18s;
+  position: absolute; bottom: 18px; right: 22px;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px; color: var(--border);
+  transition: color 0.15s, transform 0.15s;
 }
 .tile:hover .tile-arrow {
-  color: var(--t-accent, var(--accent));
+  color: var(--t-accent, var(--ink));
   transform: translate(2px, -2px);
 }
 
-/* Wide tile */
+/* Wide tile for summary/dev sections */
 .tile-wide {
+  padding: 22px 24px;
   display: flex; align-items: center;
   justify-content: space-between; gap: 16px;
 }
-.tile-wide .tile-arrow { position: static; font-size: 16px; }
+.tile-wide .tile-arrow {
+  position: static; font-size: 16px;
+  flex-shrink: 0; color: var(--border);
+}
+.tile-wide:hover .tile-arrow {
+  color: var(--t-accent, var(--ink));
+  transform: translate(2px, -2px);
+}
+
+/* Red accent block tiles — hero-style for key resources */
+.tile-accent {
+  background: var(--red);
+  border: none;
+}
+.tile-accent:hover { background: #d03e2a; }
+.tile-accent .tile-tag { color: rgba(255,255,255,0.6); }
+.tile-accent .tile-name { color: #fff; }
+.tile-accent .tile-desc { color: rgba(255,255,255,0.65); }
+.tile-accent .tile-arrow { color: rgba(255,255,255,0.4); }
+.tile-accent:hover .tile-arrow { color: #fff; }
+.tile-accent::before { background: #fff; }
+.tile-accent::after { background: #fff; }
+
+/* Dark accent block */
+.tile-dark {
+  background: var(--ink);
+}
+.tile-dark:hover { background: #222; }
+.tile-dark .tile-tag { color: rgba(255,255,255,0.4); }
+.tile-dark .tile-name { color: #fff; }
+.tile-dark .tile-desc { color: rgba(255,255,255,0.45); }
+.tile-dark .tile-arrow { color: rgba(255,255,255,0.2); }
+.tile-dark:hover .tile-arrow { color: var(--red); }
+.tile-dark::after { background: var(--red); }
 
 /* ── FOOTER ── */
 .footer {
-  padding: 20px 40px;
+  padding: 18px 40px;
   display: flex; align-items: center; justify-content: space-between;
   border-top: 1px solid var(--border);
-  background: rgba(17,29,39,0.8);
+  background: var(--ink);
 }
-.footer-copy { font-size: 11px; color: var(--muted); letter-spacing: 0.3px; }
+.footer-copy {
+  font-size: 10px; color: #555; letter-spacing: 1px;
+  text-transform: uppercase;
+}
 .footer-logo {
-  font-family: 'Fraunces', serif;
-  font-size: 14px; font-weight: 700; color: var(--accent);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px; font-weight: 700;
+  color: var(--bg); letter-spacing: 1px;
+  text-transform: uppercase;
 }
-
-.footer-logo span { font-style: italic; opacity: 0.7; }
+.footer-logo span { color: var(--red); }
 
 /* ── RESPONSIVE ── */
 @media(max-width:1100px){ .grid-6{ grid-template-columns: repeat(3,1fr); } }
 @media(max-width:900px){
   .topbar{ padding:0 24px; }
-  .hero{ padding:36px 24px 28px; }
-  .section{ padding:24px; }
+  .hero{ padding:40px 24px 32px; }
+  .section{ padding:0 24px 28px; }
   .grid-4{ grid-template-columns: repeat(2,1fr); }
   .grid-3{ grid-template-columns: repeat(2,1fr); }
   .footer{ padding:16px 24px; }
@@ -231,25 +281,28 @@ body {
   .grid-6,.grid-4,.grid-3,.grid-2{ grid-template-columns:1fr; }
   .hero-stats{ display:none; }
   .topbar-tag{ display:none; }
+  .hero-left h1{ font-size: clamp(32px,10vw,52px); }
 }
 </style>
 </head>
 <body>
 
+<!-- TOP BAR -->
 <div class="topbar">
   <div class="topbar-logo">BRND<span>·</span>ME</div>
   <div class="topbar-tag">Ops Command Centre</div>
   <div class="topbar-time" id="clock">—</div>
 </div>
 
+<!-- HERO -->
 <div class="hero">
   <div class="hero-left">
-    <h1>Influencer Ops<br><em>Command Centre</em></h1>
+    <h1>Influencer Ops<em>Command Centre</em></h1>
     <p>All portals, sheets, trackers, repositories and dashboards for the BRND.ME Middle East influencer gifting program — one place, one click.</p>
   </div>
   <div class="hero-stats">
     <div class="stat">
-      <div class="stat-num">5<span>+</span></div>
+      <div class="stat-num">5<em>+</em></div>
       <div class="stat-label">Live Brands</div>
     </div>
     <div class="stat">
@@ -267,46 +320,46 @@ body {
 <div class="section">
   <div class="section-head">
     <div class="section-label">Influencer Portals — Live</div>
-    <div class="section-line"></div>
+    <div class="section-count">6 portals</div>
   </div>
   <div class="grid grid-6">
 
-    <a href="https://brndme-hub.vercel.app/" target="_blank" class="tile" style="--t-accent:#D4DE95;">
+    <a href="https://brndme-hub.vercel.app/" target="_blank" class="tile tile-dark" style="--t-accent:#E64833;">
       <div class="tile-tag">Hub</div>
       <div class="tile-name">BRND·ME Hub</div>
       <div class="tile-desc">Central portal — all 5 brands</div>
       <div class="tile-arrow">↗</div>
     </a>
 
-    <a href="https://influencer-portal-liart.vercel.app/" target="_blank" class="tile" style="--t-accent:#c4758a;">
+    <a href="https://influencer-portal-liart.vercel.app/" target="_blank" class="tile" style="--t-accent:#8B1A2B;">
       <div class="tile-tag">Women's Fashion</div>
       <div class="tile-name">Ishin</div>
       <div class="tile-desc">Ethnic wear gifting portal</div>
       <div class="tile-arrow">↗</div>
     </a>
 
-    <a href="https://botanic-hearth-influencer-managemen.vercel.app/" target="_blank" class="tile" style="--t-accent:#7ABD8E;">
+    <a href="https://botanic-hearth-influencer-managemen.vercel.app/" target="_blank" class="tile" style="--t-accent:#1A4D30;">
       <div class="tile-tag">Personal Care</div>
       <div class="tile-name">Botanic Hearth</div>
       <div class="tile-desc">Hair, skin & body care</div>
       <div class="tile-arrow">↗</div>
     </a>
 
-    <a href="https://majestic-pure-influencer-management.vercel.app/" target="_blank" class="tile" style="--t-accent:#9B7FBD;">
+    <a href="https://majestic-pure-influencer-management.vercel.app/" target="_blank" class="tile" style="--t-accent:#4A2D7A;">
       <div class="tile-tag">Wellness</div>
       <div class="tile-name">Majestic Pure</div>
       <div class="tile-desc">Aromatherapy & wellness</div>
       <div class="tile-arrow">↗</div>
     </a>
 
-    <a href="https://villain-influencer-management.vercel.app/" target="_blank" class="tile" style="--t-accent:#E64833;">
+    <a href="https://villain-influencer-management.vercel.app/" target="_blank" class="tile tile-accent" style="--t-accent:#E64833;">
       <div class="tile-tag">Fragrance</div>
       <div class="tile-name">Villain</div>
       <div class="tile-desc">Premium fragrance</div>
       <div class="tile-arrow">↗</div>
     </a>
 
-    <a href="https://my-fitness-influencer-management.vercel.app/" target="_blank" class="tile" style="--t-accent:#E8972A;">
+    <a href="https://my-fitness-influencer-management.vercel.app/" target="_blank" class="tile" style="--t-accent:#C05A00;">
       <div class="tile-tag">Fitness & Lifestyle</div>
       <div class="tile-name">MyFitness</div>
       <div class="tile-desc">Nutrition & wellness</div>
@@ -320,25 +373,25 @@ body {
 <div class="section">
   <div class="section-head">
     <div class="section-label">Brand Order & Catalog Sheets</div>
-    <div class="section-line"></div>
+    <div class="section-count">5 sheets</div>
   </div>
   <div class="grid grid-4">
 
-    <a href="https://docs.google.com/spreadsheets/d/1I5h28_DuDituBAQbdHX_rz4RFNPzA8pflzYrmrOTLnE/edit" target="_blank" class="tile" style="--t-accent:#c4758a;">
+    <a href="https://docs.google.com/spreadsheets/d/1I5h28_DuDituBAQbdHX_rz4RFNPzA8pflzYrmrOTLnE/edit" target="_blank" class="tile" style="--t-accent:#8B1A2B;">
       <div class="tile-tag">Ishin</div>
       <div class="tile-name">Order Record & Catalog</div>
       <div class="tile-desc">Orders · catalog master · dispatch sync · Apps Script</div>
       <div class="tile-arrow">↗</div>
     </a>
 
-    <a href="https://docs.google.com/spreadsheets/d/1znEEtFTV8SvokWkmJ9GQOswxunpwIFiiU9lkXgUsisM/edit" target="_blank" class="tile" style="--t-accent:#7ABD8E;">
+    <a href="https://docs.google.com/spreadsheets/d/1znEEtFTV8SvokWkmJ9GQOswxunpwIFiiU9lkXgUsisM/edit" target="_blank" class="tile" style="--t-accent:#1A4D30;">
       <div class="tile-tag">Botanic Hearth</div>
       <div class="tile-name">Order Record & Catalog</div>
       <div class="tile-desc">Orders · product master · catalog master</div>
       <div class="tile-arrow">↗</div>
     </a>
 
-    <a href="https://docs.google.com/spreadsheets/d/1DKyiYXu4FgUKQrbBcb28zBfzAjgZgMGHfksWgyTn67I/edit" target="_blank" class="tile" style="--t-accent:#9B7FBD;">
+    <a href="https://docs.google.com/spreadsheets/d/1DKyiYXu4FgUKQrbBcb28zBfzAjgZgMGHfksWgyTn67I/edit" target="_blank" class="tile" style="--t-accent:#4A2D7A;">
       <div class="tile-tag">Majestic Pure</div>
       <div class="tile-name">Order Record & Catalog</div>
       <div class="tile-desc">Orders · product master · catalog master</div>
@@ -352,7 +405,7 @@ body {
       <div class="tile-arrow">↗</div>
     </a>
 
-    <a href="https://docs.google.com/spreadsheets/d/1OIrmgumHnObBGlNWd5KMJjpH8x4LFoxdYTT6ZppwleQ/edit" target="_blank" class="tile" style="--t-accent:#E8972A;">
+    <a href="https://docs.google.com/spreadsheets/d/1OIrmgumHnObBGlNWd5KMJjpH8x4LFoxdYTT6ZppwleQ/edit" target="_blank" class="tile" style="--t-accent:#C05A00;">
       <div class="tile-tag">MyFitness</div>
       <div class="tile-name">Order Record & Catalog</div>
       <div class="tile-desc">Orders · product master · catalog master</div>
@@ -366,25 +419,25 @@ body {
 <div class="section">
   <div class="section-head">
     <div class="section-label">Master Sheet & Trackers</div>
-    <div class="section-line"></div>
+    <div class="section-count">3 trackers</div>
   </div>
   <div class="grid grid-3">
 
-    <a href="https://docs.google.com/spreadsheets/d/16ncSViKsyUA4_jbiYkBXU0I_W3tDAwDjLg9esvRP0Qc/edit" target="_blank" class="tile" style="--t-accent:#7EC8D8;">
+    <a href="https://docs.google.com/spreadsheets/d/16ncSViKsyUA4_jbiYkBXU0I_W3tDAwDjLg9esvRP0Qc/edit" target="_blank" class="tile" style="--t-accent:#244855;">
       <div class="tile-tag">Consolidation</div>
       <div class="tile-name">Master Order Sheet</div>
       <div class="tile-desc">Cross-brand orders — lot assignment · CSV generation · FSL dispatch email · BH · MP · Villain · MF</div>
       <div class="tile-arrow">↗</div>
     </a>
 
-    <a href="https://docs.google.com/spreadsheets/d/1-mhX3OPkZiCAseIYs2wP9DsrfedyiDtRv2-JbK4mwO0/edit" target="_blank" class="tile" style="--t-accent:#7ABD8E;">
+    <a href="https://docs.google.com/spreadsheets/d/1-mhX3OPkZiCAseIYs2wP9DsrfedyiDtRv2-JbK4mwO0/edit" target="_blank" class="tile" style="--t-accent:#1A4D30;">
       <div class="tile-tag">Logistics</div>
       <div class="tile-name">Dispatch & Delivery Tracker</div>
       <div class="tile-desc">Packing status · AWB numbers · dispatch & delivery status · EMX tracking links</div>
       <div class="tile-arrow">↗</div>
     </a>
 
-    <a href="https://docs.google.com/spreadsheets/d/12NeJf0iAAP--DAscZH_RJtRb-ULBmPU0e7vUiYXLsr8/edit" target="_blank" class="tile" style="--t-accent:#D4DE95;">
+    <a href="https://docs.google.com/spreadsheets/d/12NeJf0iAAP--DAscZH_RJtRb-ULBmPU0e7vUiYXLsr8/edit" target="_blank" class="tile" style="--t-accent:#4A4A3A;">
       <div class="tile-tag">Finance</div>
       <div class="tile-name">Shipment Cost Tracker</div>
       <div class="tile-desc">Per-shipment landed COGS + logistics · monthly cost report to finance team</div>
@@ -397,36 +450,30 @@ body {
 <!-- SUMMARY DASHBOARD -->
 <div class="section">
   <div class="section-head">
-    <div class="section-label">Summary Dashboard</div>
-    <div class="section-line"></div>
+    <div class="section-label">Summary & Data</div>
+    <div class="section-count">3 resources</div>
   </div>
   <div class="grid grid-3">
 
-    <a href="https://docs.google.com/spreadsheets/d/1oMmzG7Z9FOYWwxELiXumortYBHIqozgO/edit?gid=686453389" target="_blank" class="tile tile-wide" style="--t-accent:#66FCF1;">
-      <div>
-        <div class="tile-tag">Analytics</div>
-        <div class="tile-name">Ops Summary Dashboard</div>
-        <div class="tile-desc">Pipeline overview · brand-wise breakdown · dispatch & delivery status · finance summary · month-wise cost trend</div>
-      </div>
-      <div class="tile-arrow" style="position:static;font-size:18px;">↗</div>
+    <a href="https://docs.google.com/spreadsheets/d/1oMmzG7Z9FOYWwxELiXumortYBHIqozgO/edit?gid=686453389" target="_blank" class="tile tile-dark" style="--t-accent:#E64833;">
+      <div class="tile-tag">Analytics</div>
+      <div class="tile-name">Ops Summary Dashboard</div>
+      <div class="tile-desc">Pipeline overview · brand-wise breakdown · dispatch & delivery · finance summary · month-wise trend</div>
+      <div class="tile-arrow">↗</div>
     </a>
 
-    <a href="https://docs.google.com/spreadsheets/d/1Npzw_KXvyYL4LkKtfHYF62dDpHJ0f01oojmRdkSXwVM/edit?gid=593452235" target="_blank" class="tile tile-wide" style="--t-accent:#90AEAD;">
-      <div>
-        <div class="tile-tag">Influencer Data</div>
-        <div class="tile-name">Influencer Master Repository</div>
-        <div class="tile-desc">Consolidated influencer contacts · details · channel data · updated by team</div>
-      </div>
-      <div class="tile-arrow" style="position:static;font-size:18px;">↗</div>
+    <a href="https://docs.google.com/spreadsheets/d/1Npzw_KXvyYL4LkKtfHYF62dDpHJ0f01oojmRdkSXwVM/edit?gid=593452235" target="_blank" class="tile" style="--t-accent:#244855;">
+      <div class="tile-tag">Influencer Data</div>
+      <div class="tile-name">Influencer Master Repository</div>
+      <div class="tile-desc">Consolidated influencer contacts · details · channel data · updated by team</div>
+      <div class="tile-arrow">↗</div>
     </a>
 
-    <a href="https://drive.google.com/drive/folders/1TN4WV32t-tzCOcMvyFqX4Oti3LMo5-Al" target="_blank" class="tile tile-wide" style="--t-accent:#FBE9D0;">
-      <div>
-        <div class="tile-tag">Reports & Presentations</div>
-        <div class="tile-name">Reports & Presentation Folder</div>
-        <div class="tile-desc">Influencer management · sample dispatch reports · presentations and decks</div>
-      </div>
-      <div class="tile-arrow" style="position:static;font-size:18px;">↗</div>
+    <a href="https://drive.google.com/drive/folders/1TN4WV32t-tzCOcMvyFqX4Oti3LMo5-Al" target="_blank" class="tile" style="--t-accent:#4A4A3A;">
+      <div class="tile-tag">Reports & Presentations</div>
+      <div class="tile-name">Reports & Presentation Folder</div>
+      <div class="tile-desc">Influencer management · sample dispatch reports · presentations and decks</div>
+      <div class="tile-arrow">↗</div>
     </a>
 
   </div>
@@ -436,67 +483,68 @@ body {
 <div class="section">
   <div class="section-head">
     <div class="section-label">Dev, Code & Storage</div>
-    <div class="section-line"></div>
+    <div class="section-count">6 resources</div>
   </div>
   <div class="grid grid-2">
 
-    <a href="https://github.com/anupamchakravourty-Mensa" target="_blank" class="tile tile-wide" style="--t-accent:#BAC095;">
+    <a href="https://github.com/anupamchakravourty-Mensa" target="_blank" class="tile tile-wide" style="--t-accent:#111;">
       <div>
         <div class="tile-tag">GitHub</div>
         <div class="tile-name">Code Repositories</div>
         <div class="tile-desc">All 5 brand portal source code + hub — Vercel deployment pipeline</div>
       </div>
-      <div class="tile-arrow" style="position:static;font-size:16px;">↗</div>
+      <div class="tile-arrow">↗</div>
     </a>
 
-    <a href="https://vercel.com/anupam-chakravourty-s-projects" target="_blank" class="tile tile-wide" style="--t-accent:#BAC095;">
+    <a href="https://vercel.com/anupam-chakravourty-s-projects" target="_blank" class="tile tile-wide" style="--t-accent:#111;">
       <div>
         <div class="tile-tag">Vercel</div>
         <div class="tile-name">Deployment Dashboard</div>
         <div class="tile-desc">Live deployments for all portals — build logs and domain management</div>
       </div>
-      <div class="tile-arrow" style="position:static;font-size:16px;">↗</div>
+      <div class="tile-arrow">↗</div>
     </a>
 
-    <a href="https://beta-frescon.freightsystems.com/#/dsr/2" target="_blank" class="tile tile-wide" style="--t-accent:#BAC095;">
+    <a href="https://beta-frescon.freightsystems.com/#/dsr/2" target="_blank" class="tile tile-wide" style="--t-accent:#244855;">
       <div>
         <div class="tile-tag">Frescon</div>
         <div class="tile-name">Inventory Snapshot</div>
-        <div class="tile-desc">FSL Stock and Inventory Raw Report Download and Update</div>
+        <div class="tile-desc">FSL stock and inventory raw report download and update</div>
       </div>
-      <div class="tile-arrow" style="position:static;font-size:16px;">↗</div>
+      <div class="tile-arrow">↗</div>
     </a>
 
-    <a href="https://sellercentral.amazon.ae/home" target="_blank" class="tile tile-wide" style="--t-accent:#BAC095;">
+    <a href="https://sellercentral.amazon.ae/home" target="_blank" class="tile tile-wide" style="--t-accent:#C05A00;">
       <div>
         <div class="tile-tag">Amazon Seller Central</div>
         <div class="tile-name">Sales Snapshot</div>
-        <div class="tile-desc">Amazon AE Catalog and Sales Raw Report Download and Update</div>
+        <div class="tile-desc">Amazon AE catalog and sales raw report download and update</div>
       </div>
-      <div class="tile-arrow" style="position:static;font-size:16px;">↗</div>
+      <div class="tile-arrow">↗</div>
     </a>
 
-    <a href="https://drive.google.com/drive/folders/1dF7yhwPsm4luV01IaSG_P6F_HHZIAC5A" target="_blank" class="tile tile-wide" style="--t-accent:#7EC8D8;">
+    <a href="https://drive.google.com/drive/folders/1dF7yhwPsm4luV01IaSG_P6F_HHZIAC5A" target="_blank" class="tile tile-wide" style="--t-accent:#244855;">
       <div>
         <div class="tile-tag">Google Drive</div>
         <div class="tile-name">Task Tracker Repository</div>
         <div class="tile-desc">Influencer management & sample dispatch task files</div>
       </div>
-      <div class="tile-arrow" style="position:static;font-size:16px;">↗</div>
+      <div class="tile-arrow">↗</div>
     </a>
 
-    <a href="https://drive.google.com/drive/folders/1oFL4GI4QJYNjVnrQ04PqPMoboooie2k9" target="_blank" class="tile tile-wide" style="--t-accent:#7EC8D8;">
+    <a href="https://drive.google.com/drive/folders/1oFL4GI4QJYNjVnrQ04PqPMoboooie2k9" target="_blank" class="tile tile-wide" style="--t-accent:#244855;">
       <div>
         <div class="tile-tag">Google Drive</div>
         <div class="tile-name">Dispatch Task Repository</div>
         <div class="tile-desc">Influencer sample dispatch lot CSVs and shipping documents</div>
       </div>
-      <div class="tile-arrow" style="position:static;font-size:16px;">↗</div>
+      <div class="tile-arrow">↗</div>
     </a>
 
   </div>
 </div>
 
+<!-- FOOTER -->
 <div class="footer">
   <div class="footer-copy">BRND.ME Middle East · Influencer Ops · Internal Use Only</div>
   <div class="footer-logo">BRND<span>·</span>ME</div>
